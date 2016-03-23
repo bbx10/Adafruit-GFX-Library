@@ -480,12 +480,12 @@ void Adafruit_GFX::write(uint8_t c) {
     } else if(c == '\r') {
       // skip em
     } else {
-      if(wrap && ((cursor_x + textsize * 6) >= _width)) { // Heading off edge?
+      drawChar(cursor_x, cursor_y, c, textcolor, textbgcolor, textsize);
+      cursor_x += textsize * 6;
+      if(wrap && (cursor_x >= _width)) { // Heading off edge?
         cursor_x  = 0;            // Reset x to zero
         cursor_y += textsize * 8; // Advance y one line
       }
-      drawChar(cursor_x, cursor_y, c, textcolor, textbgcolor, textsize);
-      cursor_x += textsize * 6;
     }
 
   } else { // Custom font
